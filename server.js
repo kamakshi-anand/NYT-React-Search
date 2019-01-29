@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-
+const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const apiRoutes = require("./routes/apiRoutes");
@@ -15,6 +15,8 @@ if (process.env.NODE_ENV === "production") {
 
 // Use apiRoutes
 app.use("/api", apiRoutes);
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/googlebooks";
+mongoose.connect(MONGODB_URI,{ useNewUrlParser: true});
 
 // Send every request to the React app
 // Define any API routes before this runs

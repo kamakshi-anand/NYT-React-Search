@@ -5,6 +5,8 @@ import Input from "./components/Input";
 import Button from "./components/Button";
 import API from "./utils/API";
 import { BookList, BookListItem } from "./components/BookList";
+//import BookList from "./components/BookList/";
+//import BookListItem from "./components/BookListItem/";
 import { Container, Row, Col } from "./components/Grid";
 
 
@@ -26,7 +28,7 @@ class App extends Component {
   handleFormSubmit = event => {
     // When the form is submitted, prevent its default behavior, get recipes update the recipes state
     event.preventDefault();
-  //  alert("i am in");
+    //  alert("i am in");
     API.getBooks(this.state.bookSearch)
       .then(res => {
         console.log("FDFDFDFDFD  " + res.data);
@@ -35,7 +37,23 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
- 
+  addBook = position => {
+    // When the form is submitted, prevent its default behavior, get recipes update the recipes state
+    //  event.preventDefault();
+    alert("I am in index " + position + " Value is " + this.state.books[position].volumeInfo.title);
+    API.addBook({
+      title: this.state.books[position].volumeInfo.title,
+      description: this.state.books[position].volumeInfo.description,
+      pageCount: this.state.books[position].volumeInfo.pageCount,
+      averageRating: this.state.books[position].volumeInfo.averageRating,
+      authors: this.state.books[position].volumeInfo.authors,
+      selfLink: this.state.books[position].selfLink
+      //synopsis : this.state.synopsis
+    })
+      .then(res => this.loadBooks())
+      .catch(err => console.log(err));
+
+  };
 
 
   render() {
@@ -72,65 +90,40 @@ class App extends Component {
             </Col>
           </Row>
           <Row>
-          <Col size="xs-12">
+            <Col size="xs-12">
               {/* <h1>Render Recipes Here</h1> */}
               <BookList>
-                {this.state.books.map(books => {
+                {this.state.books.map((books, index) => {
                   return (
                     <BookListItem
-                      key={books.volumeInfo.title}
+                      key={index}
                       title={books.volumeInfo.title}
                       href={books.href}
                       // ingredients={recipe.ingredients}
                       thumbnail={books.volumeInfo.imageLinks.thumbnail}
-                      //authors={books.volumeInfo.authors}
+                      authors={books.volumeInfo.authors}
                       pageCount={books.volumeInfo.pageCount}
                       averageRating={books.volumeInfo.averageRating}
+                      previewLink={books.volumeInfo.previewLink}
                       description={books.volumeInfo.description}
+
+                      addBook={this.addBook}
+                      index={index}
+                    // onClick={() => this.addBook(index)}
                     />
                   );
                 })}
               </BookList>
-              {/* {!this.state.recipes.length ? (    
-                    
-                <RecipeList>
-                {this.state.recipes.map(recipe => {
-                  return (
-                    <RecipeListItem
-                      key={recipe.title}
-                      title={recipe.title}
-                      href={recipe.href}
-                      ingredients={recipe.ingredients}
-                      thumbnail={recipe.thumbnail}
-                    />
-                  );
-                })}
-              </RecipeList>
-              ) : (
-                
-                  <RecipeList>
-                    {this.state.recipes.map(recipe => {
-                      return (
-                        <RecipeListItem
-                          key={recipe.title}
-                          title={recipe.title}
-                          href={recipe.href}
-                          ingredients={recipe.ingredients}
-                          thumbnail={recipe.thumbnail}
-                        />
-                      );
-                    })}
-                  </RecipeList>
-                )} */}
+
             </Col>
           </Row>
-         
+
 
 
         </Container>
       </div>
-        );
-      }
-    }
-    
-    export default App;
+    );
+  }
+}
+
+export default App;
