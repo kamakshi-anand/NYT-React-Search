@@ -45,9 +45,6 @@ class App extends Component {
   };
 
   addBook = position => {
-    // When the form is submitted, prevent its default behavior, get recipes update the recipes state
-    //  event.preventDefault();
-    alert("I am in index " + position + " Value is " + this.state.books[position].volumeInfo.title);
     API.addBook({
       title: this.state.books[position].volumeInfo.title,
       description: this.state.books[position].volumeInfo.description,
@@ -56,9 +53,6 @@ class App extends Component {
       authors: this.state.books[position].volumeInfo.authors,
       href:this.state.books[position].href,
       thumbnail:this.state.books[position].volumeInfo.imageLinks.thumbnail
-
-      //selfLink: this.state.books[position].selfLink
-      //synopsis : this.state.synopsis
     })
       .then(res => this.loadBooks())
       .catch(err => console.log(err));

@@ -18,9 +18,9 @@ export default {
      return axios.post("/api/books", bookData);
    },
 
-   deleteBook: function(bookData){
-     console.log("check delete book");
-     return axios.delete("api/:id")
+   deleteBook: function(id){
+     console.log("check delete book "+id);
+     return axios.delete("/api/books/"+id )
    }
    
 }; 

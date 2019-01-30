@@ -10,11 +10,13 @@ module.exports = {
   },
 
   remove: function(req, res) {
-    console.log("I am in Books controller "+req.body.pageCount);
-     db.Book.remove(req.body)
-       .then(dbModel => res.json(dbModel))
-       .catch(err => res.status(422).json(err));
-   },
+    console.log("**** Remove Bookd "+req.params.id);
+    db.Book
+      .findById({ _id: req.params.id })
+      .then(dbModel => dbModel.remove())
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
 
    findAll: function(req, res) {
     console.log(" I am in Controller FindAll"+req.query);

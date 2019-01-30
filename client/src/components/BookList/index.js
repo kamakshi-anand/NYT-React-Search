@@ -38,7 +38,7 @@ export function BookListItem(props) {
                 <Button
                   type="success"
                   className="input-lg"
-                //  onClick={() => props.addBook(props.index)}
+                  onClick={() => props.deleteBook(props.id)}
                 >
                   Delete
                       </Button>

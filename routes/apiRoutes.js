@@ -28,10 +28,11 @@ router.route("/allbooks")
   .get(booksController.findAll);
 
 router.route("/books") 
-  .post(booksController.create);
+  .post(booksController.create)
 
-  // router.route("/:id")
-  // .delete(booksController.remove);
-
+  
+  router
+  .route("/books/:id")
+  .delete(booksController.remove);
 
 module.exports = router;

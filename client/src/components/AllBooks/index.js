@@ -37,9 +37,11 @@ class App extends Component {
   };
 
   deleteBook = id => {
+    alert(' I am in delete '+ id);
     API.deleteBook(id)
-      .then(res => this.loadBooks())
+      .then(res=> this.loadBooks())    
       .catch(err => console.log(err));
+  
   };
 
 
@@ -77,6 +79,7 @@ class App extends Component {
                     <BookListItem
                       key={index}
                       title={books.title}
+                      id={books._id}
                      // href={books.href}
                       // ingredients={recipe.ingredients}
                       thumbnail={books.thumbnail}
@@ -89,6 +92,7 @@ class App extends Component {
                       addBook={this.addBook}
                       source="allbooks"
                       index={index}
+                      deleteBook={this.deleteBook}
                     // onClick={() => this.addBook(index)}
                     />
                   );
