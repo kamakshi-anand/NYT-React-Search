@@ -7,6 +7,22 @@ module.exports = {
     db.Book.create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  } 
+  },
+
+  remove: function(req, res) {
+    console.log("I am in Books controller "+req.body.pageCount);
+     db.Book.remove(req.body)
+       .then(dbModel => res.json(dbModel))
+       .catch(err => res.status(422).json(err));
+   },
+
+   findAll: function(req, res) {
+    console.log(" I am in Controller FindAll"+req.query);
+    db.Book
+      .find(req.query)
+      .sort({ date: -1 })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
 
 };

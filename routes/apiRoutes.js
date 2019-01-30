@@ -18,7 +18,20 @@ router.get("/books", (req, res) => {
   .catch(err => res.status(422).json(err));
 });
 
+// router.get("/api/allbooks", (req, res) => {   
+//   booksController.findAll
+//   .then(({ data: { items } }) => res.json(items))
+//   .catch(err => res.status(422).json(err));
+// });
+
+router.route("/allbooks") 
+  .get(booksController.findAll);
+
 router.route("/books") 
   .post(booksController.create);
+
+  // router.route("/:id")
+  // .delete(booksController.remove);
+
 
 module.exports = router;

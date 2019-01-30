@@ -7,7 +7,9 @@ const bookSchema = new Schema({
   rating : String,
   date: { type: Date, default: Date.now },
   authors: { type: String, required: true},
-  previewLink: {type: String, required: true},
+  href:{type: String},
+  thumbnail:{type: String},
+  //previewLink: {type: String, required: true},
   pageCount: {type: Number}
 });
 

@@ -8,9 +8,19 @@ export default {
     return axios.get("/api/books", { params: { q: query } });
   },
 
+  getBooksFromDB: function(query) {
+     console.log("i am in get All books");
+     return axios.get("/api/allbooks", { params: { q: query } });
+   },
+
   addBook: function(bookData) {
      console.log("i am inadd book in API.js "+bookData);
      return axios.post("/api/books", bookData);
+   },
+
+   deleteBook: function(bookData){
+     console.log("check delete book");
+     return axios.delete("api/:id")
    }
    
-};
+}; 
